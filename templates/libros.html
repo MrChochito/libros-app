@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Libros</title></head>
+<body>
+    <h2>Lista de Libros</h2>
+    <a href="/libros/agregar">Agregar nuevo libro</a>
+    <ul>
+        {{range .}}
+            <li><strong>{{.Titulo}}</strong> - {{.Autor}} ({{.Genero}})</li>
+        {{else}}
+            <p>No hay libros agregados.</p>
+        {{end}}
+    </ul>
+    <h3>Exportar Libros</h3>
+<form action="/exportar" method="POST">
+    <select name="formato">
+        <option value="json">JSON</option>
+        <option value="csv">CSV</option>
+    </select>
+    <button type="submit">Exportar</button>
+</form>
+</body>
+</html>
