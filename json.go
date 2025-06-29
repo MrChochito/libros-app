@@ -8,7 +8,8 @@ import (
 	"os"
 )
 
-func main() {
+// Ejecuta esta función para probar la serialización JSON.
+func JSON() {
 	// Crear un libro de ejemplo
 	libro := models.Libro{
 		ID:                   1,
