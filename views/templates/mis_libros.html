@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Mis Libros</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="bg-[#f8fbfa] min-h-screen flex flex-col items-center">
+    {{template "header" .}}
+    <div class="w-full max-w-5xl mx-auto mt-10">
+      <h2 class="text-2xl font-bold mb-6 text-center text-[#0e1a13]">Mis libros prestados o en lectura</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {{range .Libros}}
+        <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="{{.Imagen}}" alt="Portada" class="w-32 h-48 object-cover rounded mb-2">
+          <h3 class="text-lg font-semibold text-[#0e1a13]">{{.Titulo}}</h3>
+          <p class="text-[#51946b] text-sm mb-2">{{.Autor}}</p>
+          <span class="text-xs mb-2 px-2 py-1 rounded {{if .Disponible}}bg-green-100 text-green-700{{else}}bg-red-100 text-red-700{{end}}">
+            {{if .Disponible}}Activo{{else}}Finalizado{{end}}
+          </span>
+          {{if .Disponible}}
+          <div class="flex flex-col gap-2 w-full">
+            <a href="/libro/{{.Slug}}" class="bg-[#39e079] text-white px-4 py-2 rounded w-full text-center">Seguir leyendo</a>
+            <a href="/descargar/{{.PrestamoID}}" class="bg-[#0e1a13] text-white px-4 py-2 rounded w-full text-center">Descargar PDF</a>
+            <span class="text-xs text-[#51946b] mt-1">Te quedan <b>{{.DiasRestantes}}</b> días de préstamo</span>
+          </div>
+          {{end}}
+        </div>
+        {{else}}
+        <div class="col-span-3 text-center text-gray-500">No tienes libros prestados actualmente.</div>
+        {{end}}
+      </div>
+    </div>
+  </body>
+</html>

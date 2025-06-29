@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Serif%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>{{.Book.Titulo}}</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f8fbfa] group/design-root overflow-x-hidden" style='font-family: "Noto Serif", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        {{template "header" .}}
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <div class="flex min-w-72 flex-col gap-3 relative">
+                <div class="flex items-center gap-2">
+                  <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight">{{.Book.Titulo}}</p>
+                  {{if and .Book.PDF (eq .Book.UsuarioID .UserID)}}
+                  <a href="/libro/{{.Book.Slug}}/editar" class="ml-2 bg-[#51946b] text-white px-3 py-1 rounded hover:bg-[#39e079] transition text-base">Editar</a>
+                  {{end}}
+                </div>
+                <p class="text-[#51946b] text-sm font-normal leading-normal">Por {{.Book.Autor}}</p>
+              </div>
+            </div>
+            <div class="pb-3">
+              <div class="flex border-b border-[#d1e6d9] px-4 gap-8">
+                <a class="flex flex-col items-center justify-center border-b-[3px] border-b-[#39e079] text-[#0e1a13] pb-[13px] pt-4" href="#">
+                  <p class="text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]">Leer</p>
+                </a>
+              </div>
+            </div>
+            <div class="p-4">
+              {{if and .Book.PDF .PuedeVerPDF}}
+              <div id="pdf-container" class="w-full h-[600px] max-w-full relative rounded-lg bg-[#39e079] flex items-center justify-center">
+                <iframe id="pdf-frame" src="{{.Book.PDF}}" class="w-full h-full rounded-lg border-none bg-[#39e079]" style="background:#39e079;" allowfullscreen></iframe>
+                <button onclick="openFullscreen()" class="absolute top-2 right-2 bg-[#0e1a13] text-white px-3 py-1 rounded hover:bg-[#51946b] transition">Pantalla completa</button>
+              </div>
+              <script>
+                function openFullscreen() {
+                  var elem = document.getElementById('pdf-frame');
+                  if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                  } else if (elem.mozRequestFullScreen) { /* Firefox */
+                    elem.mozRequestFullScreen();
+                  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                    elem.webkitRequestFullscreen();
+                  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                    elem.msRequestFullscreen();
+                  }
+                }
+              </script>
+              {{else if .Book.PDF}}
+              <div class="relative flex items-center justify-center bg-[#39e079] bg-cover bg-center aspect-video rounded-lg p-4" style='background-image: url("{{.Book.Imagen}}")'>
+                <div class="absolute inset-0 bg-gray-800/60 backdrop-blur-sm rounded-lg flex items-center justify-center"></div>
+                <div class="relative text-white text-center z-10">
+                  <p class="text-2xl font-bold drop-shadow">Solicita un préstamo para leer el PDF</p>
+                  <p class="text-lg drop-shadow">Solo los usuarios con préstamo activo pueden ver el PDF de este libro.</p>
+                </div>
+              </div>
+              {{else}}
+              <div class="relative flex items-center justify-center bg-[#39e079] bg-cover bg-center aspect-video rounded-lg p-4" style='background-image: url("{{.Book.Imagen}}")'>
+                <!-- Imagen de portada -->
+              </div>
+              {{end}}
+            </div>
+            <h3 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Resumen</h3>
+            <p class="text-[#0e1a13] text-base font-normal leading-normal pb-3 pt-1 px-4">{{.Book.Resumen}}</p>
+            <h3 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Etiquetas</h3>
+            <div class="flex gap-3 p-3 flex-wrap pr-4">
+              {{range (split .Book.Etiquetas ",")}}
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#e8f2ec] pl-4 pr-4">
+                <p class="text-[#0e1a13] text-sm font-medium leading-normal">{{.}}</p>
+              </div>
+              {{end}}
+            </div>
+            <h3 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Disponibilidad</h3>
+            <p class="text-[#0e1a13] text-base font-normal leading-normal pb-3 pt-1 px-4">{{if .Book.Disponible}}Disponible{{else}}No disponible{{end}}</p>
+            {{if ne .Book.UsuarioID .UserID}}
+            <form action="/libro/{{.Book.Slug}}/prestar" method="post" class="inline">
+              <button type="submit" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#39e079] text-[#0e1a13] text-sm font-bold leading-normal tracking-[0.015em]">Pedir prestado</button>
+            </form>
+            {{end}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
