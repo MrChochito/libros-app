@@ -171,7 +171,7 @@ func PedirPrestamo(libroID int, usuarioID int) error {
 		return err
 	}
 	if existe > 0 {
-		return fmt.Errorf("Ya tienes este libro prestado y no lo has devuelto")
+		return fmt.Errorf("ya tienes este libro prestado y no lo has devuelto")
 	}
 
 	// Obtener la duración predeterminada del préstamo del libro
