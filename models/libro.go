@@ -271,3 +271,22 @@ func MarcarPrestamosVencidosComoDevueltos() error {
 	return err
 }
 
+// Obtener libros filtrados por búsqueda
+func BuscarLibros(query string) ([]Libro, error) {
+	q := "%" + query + "%"
+	rows, err := database.DB.Query(`SELECT id, titulo, autor, imagen, slug FROM libros WHERE titulo LIKE @p1 OR autor LIKE @p1`, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var libros []Libro
+	for rows.Next() {
+		var l Libro
+		err := rows.Scan(&l.ID, &l.Titulo, &l.Autor, &l.Imagen, &l.Slug)
+		if err != nil {
+			return nil, err
+		}
+		libros = append(libros, l)
+	}
+	return libros, nil
+}

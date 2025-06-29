@@ -35,13 +35,16 @@
                     </svg>
                   </div>
                   <input
-                    placeholder="Search for books"
+                    placeholder="Buscar libros..."
                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-full placeholder:text-[#51946b] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
                     value=""
                   />
                 </div>
               </label>
             </div>
+            {{if .Busqueda}}
+              <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Resultados de búsqueda para "{{.Busqueda}}"</h2>
+            {{end}}
             <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Most Searched Books of the Week</h2>
             <div class="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <div class="flex items-stretch p-4 gap-3">

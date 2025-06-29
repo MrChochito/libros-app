@@ -66,7 +66,7 @@ func Authenticate(w http.ResponseWriter, r *http.Request) {
 	})
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
-
+	// Registrar usuario nuevo
 func RegistrarUsuario(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)

@@ -54,21 +54,23 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 // HomeLogged muestra la página principal para usuarios logueados.
 func HomeLogged(w http.ResponseWriter, r *http.Request) {
-	// Igual que Home, pero para usuarios autenticados
 	cookie, err := r.Cookie("session")
 	if err != nil || cookie.Value == "" {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 		return
 	}
 
-	recientes, err := models.ObtenerLibrosRecientes()
-	if err != nil {
-		http.Error(w, "Error obteniendo libros recientes", http.StatusInternalServerError)
-		return
+	q := r.URL.Query().Get("q")
+	var recientes, masVistos []models.Libro
+	if q != "" {
+		recientes, err = models.BuscarLibros(q)
+		masVistos = []models.Libro{} // No mostrar populares si hay búsqueda
+	} else {
+		recientes, err = models.ObtenerLibrosRecientes()
+		masVistos, err = models.ObtenerLibrosMasVistos()
 	}
-	masVistos, err := models.ObtenerLibrosMasVistos()
 	if err != nil {
-		http.Error(w, "Error obteniendo libros populares", http.StatusInternalServerError)
+		http.Error(w, "Error obteniendo libros", http.StatusInternalServerError)
 		return
 	}
 
@@ -81,6 +83,7 @@ func HomeLogged(w http.ResponseWriter, r *http.Request) {
 		"Recientes": recientes,
 		"Populares": masVistos,
 		"Active":    "home",
+		"Busqueda":  q,
 	})
 	if err != nil {
 		http.Error(w, "Error mostrando página", http.StatusInternalServerError)
@@ -501,4 +504,3 @@ func EliminarPrestamoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/perfil#tab-borrowed", http.StatusSeeOther)
 }
-
