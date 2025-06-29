@@ -1,0 +1,15 @@
+{
+  "ID": 1,
+  "Titulo": "El Principito",
+  "Autor": "Antoine de Saint-Exupéry",
+  "Imagen": "el-principito.jpg",
+  "Resumen": "Un cuento para niños y adultos.",
+  "Etiquetas": "clásico,aventura",
+  "Disponible": true,
+  "Vistas": 100,
+  "VecesPrestado": 10,
+  "UsuarioID": 2,
+  "Slug": "el-principito",
+  "DuracionPrestamoDias": 7,
+  "PDF": "el-principito.pdf"
+}
