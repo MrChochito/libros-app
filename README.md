@@ -17,7 +17,7 @@ Este proyecto es una aplicación web desarrollada en Go para la gestión de libr
 - **Préstamos:** Solicitar y devolver libros, con control de disponibilidad y fechas.
 - **Carga y descarga de archivos:** Subida de portadas e integración de archivos PDF.
 - **Panel de usuario:** Visualización de libros prestados y perfil personal.
-- **Serialización JSON:** Ejemplo de serialización y deserialización de objetos Go a JSON en el archivo `json.go`.
+- **Serialización JSON:** Serialización y deserialización de objetos Go a JSON en el archivo `json.go`. Este archivo es solo de ejemplo y no debe ejecutarse junto con la aplicación principal.
 
 ## Estructura del Proyecto
 - `cmd/` - Código principal de arranque del servidor
@@ -27,7 +27,7 @@ Este proyecto es una aplicación web desarrollada en Go para la gestión de libr
 - `static/` - Archivos estáticos (CSS, JS, imágenes, PDFs)
 - `views/` - Plantillas HTML
 - `utils/` - Funciones utilitarias
-- `json.go` - Ejemplo de serialización y deserialización JSON
+- `json.go` - Ejemplo de serialización y deserialización JSON (no ejecutar junto con la app principal)
 
 ## Mejoras a Futuro
 - Implementar un sistema DRM (Digital Rights Management) para proteger los archivos PDF descargados y evitar su distribución no autorizada.
@@ -50,7 +50,7 @@ Este repositorio está diseñado para facilitar la gestión y préstamo de libro
    - Ejecuta el archivo `base_de_datos.sql` en tu SQL Server local para crear y poblar la base de datos necesaria para el sistema.
    - Puedes generar este archivo siguiendo las instrucciones de la siguiente sección.
 
-4. Ejecuta el proyecto:
+4. Ejecuta el proyecto principal:
    ```sh
    go run main.go
    ```
