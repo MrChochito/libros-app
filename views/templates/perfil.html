@@ -118,6 +118,26 @@
               <div class="col-span-3 text-center text-gray-500">No has subido libros aún.</div>
               {{end}}
             </div>
+            <button id="btn-graficas" class="mt-8 bg-[#0e1a13] text-white px-4 py-2 rounded">Gráficas</button>
+            <div id="graficas-section" class="hidden mt-6 w-full max-w-4xl mx-auto bg-white rounded-lg shadow p-6">
+              <h3 class="text-lg font-bold mb-4 text-center">Estadísticas de Libros</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <h4 class="font-semibold text-center mb-2">Libros más prestados</h4>
+                  <canvas id="grafica-mas-prestados" width="300" height="220"></canvas>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-center mb-2">Categorías de libros</h4>
+                  <canvas id="grafica-categorias" width="300" height="220"></canvas>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-center mb-2">Préstamos por semana</h4>
+                  <canvas id="grafica-prestamos-semana" width="300" height="220"></canvas>
+                </div>
+              </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="/static/js/graficas.js"></script>
           </div>
           <div id="tab-borrowed" class="w-full max-w-4xl hidden">
             <h3 class="text-lg font-bold mb-4">Mis libros prestados o en lectura</h3>

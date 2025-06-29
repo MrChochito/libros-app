@@ -20,4 +20,9 @@ func LoadRoutes() {
 	http.HandleFunc("/libro/", controllers.LibroMultipropositoHandler) // Maneja detalle y edición
 	http.HandleFunc("/descargar/", controllers.DescargarPDFPrestamoHandler)
 	http.HandleFunc("/prestamo/", controllers.EliminarPrestamoHandler)
+
+	// Rutas de la API para las gráficas
+	http.HandleFunc("/api/graficas/mas-prestados", controllers.GraficaMasPrestados)
+	http.HandleFunc("/api/graficas/categorias", controllers.GraficaCategorias)
+	http.HandleFunc("/api/graficas/prestamos-semana", controllers.GraficaPrestamosSemana)
 }

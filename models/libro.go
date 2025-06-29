@@ -95,10 +95,8 @@ func GetLibroBySlug(slug string) (*Libro, error) {
 	var l Libro
 	err := row.Scan(&l.ID, &l.Titulo, &l.Autor, &l.Imagen, &l.Resumen, &l.Etiquetas, &l.Disponible, &l.Vistas, &l.VecesPrestado, &l.UsuarioID, &l.Slug, &l.DuracionPrestamoDias, &l.PDF)
 	if err != nil {
-		fmt.Printf("ERROR GetLibroBySlug: %v para slug='%s'\n", err, slug)
 		return nil, err
 	}
-	fmt.Printf("DEBUG GetLibroBySlug: libro encontrado ID=%d, titulo='%s', slug='%s'\n", l.ID, l.Titulo, l.Slug)
 	return &l, nil
 }
 

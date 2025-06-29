@@ -302,7 +302,7 @@ func EditarLibroHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// PDF (opcional)
 	pdfFile, pdfHandler, err := r.FormFile("pdf")
-	pdfPath := libro.Imagen // valor por defecto si no hay PDF nuevo
+	pdfPath := libro.PDF // <-- Mantener el PDF anterior si no se sube uno nuevo
 	if err == nil && pdfHandler != nil {
 		pdfDir := "static/uploads/pdf"
 		os.MkdirAll(pdfDir, os.ModePerm)
