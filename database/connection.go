@@ -126,3 +126,4 @@ func crearTablas() {
 		log.Fatal("❌ Error creando tabla prestamos:", err)
 	}
 }
+

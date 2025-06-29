@@ -78,3 +78,4 @@ func GraficaPrestamosSemana(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(map[string]interface{}{"labels": labels, "values": values})
 }
+

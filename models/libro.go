@@ -270,3 +270,4 @@ func MarcarPrestamosVencidosComoDevueltos() error {
 	_, err := database.DB.Exec(`UPDATE prestamos SET devuelto = 1 WHERE fecha_devolucion < CONVERT(date, GETDATE()) AND devuelto = 0`)
 	return err
 }
+

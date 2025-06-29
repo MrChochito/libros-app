@@ -501,3 +501,4 @@ func EliminarPrestamoHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/perfil#tab-borrowed", http.StatusSeeOther)
 }
+

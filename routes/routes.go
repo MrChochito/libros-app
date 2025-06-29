@@ -26,3 +26,4 @@ func LoadRoutes() {
 	http.HandleFunc("/api/graficas/categorias", controllers.GraficaCategorias)
 	http.HandleFunc("/api/graficas/prestamos-semana", controllers.GraficaPrestamosSemana)
 }
+
