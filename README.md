@@ -35,3 +35,37 @@ Este proyecto es una aplicación web desarrollada en Go para la gestión de libr
 ---
 
 Este repositorio está diseñado para facilitar la gestión y préstamo de libros electrónicos en un entorno académico o personal.
+
+## Cómo ejecutar este proyecto
+
+1. Clona el repositorio:
+   ```sh
+   git clone https://github.com/MrChochito/libros-app.git
+   cd libros-app
+   ```
+
+2. Instala Go desde [https://go.dev/dl/](https://go.dev/dl/).
+
+3. Configura la base de datos:
+   - Ejecuta el archivo `base_de_datos.sql` en tu SQL Server local para crear y poblar la base de datos necesaria para el sistema.
+   - Puedes generar este archivo siguiendo las instrucciones de la siguiente sección.
+
+4. Ejecuta el proyecto:
+   ```sh
+   go run main.go
+   ```
+
+5. Abre tu navegador y accede a `http://localhost:8080`.
+
+---
+
+## Cómo crear y restaurar el archivo base_de_datos.sql en SQL Server
+
+1. Abre SQL Server Management Studio (SSMS) y conéctate a tu servidor.
+2. Haz clic derecho sobre la base de datos que quieres exportar.
+3. Selecciona **Tareas > Generar scripts...**
+4. En el asistente, selecciona **Todos los objetos** y en opciones avanzadas elige **Esquema y datos**.
+5. Guarda el archivo como `base_de_datos.sql`.
+6. Para restaurar la base de datos en otra PC, abre SSMS, crea una base de datos vacía, abre el archivo `base_de_datos.sql` y ejecútalo sobre esa base de datos.
+
+---
